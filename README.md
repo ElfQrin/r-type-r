@@ -1,6 +1,6 @@
 # r-type-r
 
-A collection of scripts in R to generate graphs, charts, stats, and random numbers. All script can output data on Screen, or as SVG (vectorial, requires RSvgDevice), PNG (bitmap), PDF.
+A collection of scripts in R to generate graphs, charts, stats, and random numbers. Scripts for graphs and charts can output data on Screen, or as SVG (vectorial, requires RSvgDevice), PNG (bitmap), PDF.
 
 - hello_world.r : Outputs 'Hello World!'
 - fgraph2d.r : Graph of a 2D Function (it also can plot dots on a Cartesian plane).
