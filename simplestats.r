@@ -1,9 +1,15 @@
 # Simple Stats
 # by Valerio Capello (Elf Qrin) / http://labs.geody.com/
-# r2011-07-05 fr2011-07-05
+# r2021-01-18 fr2011-07-05
 # License: GPL
 
+
+# Config
+
 x1<-c(-1,0,0,1,5,-1,3,3,3,4,5,4,2,4,1,5,6,4,5,5); # Define Items (Source data)
+
+
+# Functions
 
 mode_stat <- function(v) {
 corr=abs(min(v))+1;
@@ -13,6 +19,9 @@ vmode<-which(vt==max(vt));
 if (sum(vt==max(vt))>1) {vmode<-NA;} else {vmode<-vmode-corr;}
 vmode;
 }
+
+
+# Main
 
 "Stats";
 "Items (as given): "; print(x1);

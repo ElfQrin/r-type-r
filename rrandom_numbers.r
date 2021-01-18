@@ -1,13 +1,18 @@
 # RRandom Numbers
 # by Valerio Capello (Elf Qrin) / http://labs.geody.com/
-# r2011-12-06 fr2011-11-26
+# r2021-01-18 fr2011-11-26
 # License: GPL
 
+
 # Config
+
 rngen<-10; # Numbers to generate
 rnmin<-1; # Min value
 rnmax<-12; # Max value
 rndcc<-10^2; # Decimal digits (for Decimal numbers generated with "sample")
+
+
+# Main
 
 # Generate N decimal numbers between Min and Max (excluded), with repeats
 rndx<-runif(rngen,rnmin,rnmax);
@@ -54,4 +59,3 @@ rndx;
 rndc<-c("one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve");
 rndx<-sample(rndc,length(rndc),replace=F);
 rndx;
-

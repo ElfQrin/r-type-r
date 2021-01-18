@@ -1,10 +1,12 @@
 # Simple Charts
 # by Valerio Capello (Elf Qrin) / http://labs.geody.com/
-# r2013-08-18 fr2011-06-19
+# r2021-01-18 fr2011-06-19
 # License: GPL
 
+
 # Config
-xzou <- 1; # Output: 1: Screen, 2: SVG file (vectorial, requires RSvgDevice), 3: PNG file (bitmap), 4: PDF
+
+xzou <- "scn"; # Output: scn: Screen, svg_1: SVG file (vectorial, requires RSvgDevice), svg_2: SVG file (vectorial, requires svglite), png: PNG file (bitmap), pdf: PDF document
 xzplot <- 2; # Chart type: 0: Dots, 1: Line, 2: Dots + Line, 3: Bars (vertical), 4: Bars (horizontal), 5: Histogram, 6: Pie (clockwise), 7: Pie (anticlockwise), 8: Dotchart
 xzbgcol <- "white"; # Background color
 xztitle <- "Chart"; # Title of the Chart
@@ -18,6 +20,9 @@ xzaxxt="Week Days"; # Labels (generally X-Axis) title (Chart type 0, 1, 2, 3, 4,
 xzaxyt="Items"; # Values (generally Y-Axis) title (Chart type 0, 1, 2, 3, 4, 5, 8)
 xzstats=TRUE; # Statistical Information (Chart type 0, 1, 2, 3)
 
+
+# Functions
+
 mode_stat <- function(v) {
 corr=abs(min(v))+1;
 v<-v+corr;
@@ -27,6 +32,9 @@ if (sum(vt==max(vt))>1) {vmode<-NA;} else {vmode<-vmode-corr;}
 vmode;
 }
 
+
+# Main
+
 if (xzaxvl) {
 xzaxx <- paste(xzaxx," - ",sdata1,sep="");
 }
@@ -34,16 +42,22 @@ if (xzaxpc) {
 xzaxx <- paste(xzaxx," ","(",round(sdata1/sum(sdata1)*100,1),"%",")",sep="");
 }
 if (xzplot == 4) {xztmp <- xzaxxt; xzaxxt <- xzaxyt; xzaxyt <- xztmp;}
-if (xzou == 1) {
+
+# Open Output Device
+if (xzou=="scn") {
 par(bg = xzbgcol);
-} else if (xzou == 2) {
+} else if (xzou=="svg_1") {
 library(RSvgDevice);
 devSVG(paste(xzfname,".svg",sep="",collapse=""), width=10, height=10, bg=xzbgcol);
-} else if (xzou == 3) {
+} else if (xzou=="svg_2") {
+library(svglite);
+svglite(file=paste(xzfname,".svg",sep="",collapse=""), width=10, height=10, bg=xzbgcol, pointsize=12, standalone=TRUE, system_fonts=list(), user_fonts=list());
+} else if (xzou=="png") {
 png(filename=paste(xzfname,".png",sep="",collapse=""), height=500, width=500, bg=xzbgcol);
-} else if (xzou == 4) {
+} else if (xzou=="pdf") {
 pdf(file=paste(xzfname,".pdf",sep="",collapse=""), height=5, width=5, bg=xzbgcol);
 }
+
 gtrange <- range(0, sdata1);
 if (xzplot == 0) {
 plot(sdata1,col="red", ylim=gtrange, axes=FALSE, ann=FALSE);
@@ -92,6 +106,8 @@ paste("SDv",formatC(sd(sdata1),format="f",digits=5),sep=" ",collapse="")
 cex=0.8,text.col=c("darkblue"),bg="azure"
 );
 }
-if (xzou > 1) {
+
+# Close Output Device
+if (xzou!="scn") {
 dev.off();
 }
